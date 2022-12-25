@@ -1,0 +1,137 @@
+<div style="padding: 2%">
+  <form [formGroup]="empFormGroup">
+    <td>Date</td>
+    <td>
+      <mat-form-field>
+        <input
+          matInput
+          [max]="maxDate"
+          [matDatepicker]="picker"
+          [(ngModel)]="filterDate"
+          formControlName="date"
+          id="date"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('date', 'required')"
+          >Date is required</mat-error>
+      </mat-form-field>
+    </td>
+
+    <td>Company</td>
+    <td>
+      <mat-form-field floatLabel="never">
+        <mat-select id="comname" formControlName="comname" [(ngModel)]="comID">
+          <mat-option
+            *ngFor="let company of companies"
+            [value]="company.companyId"
+            >{{ company.companyName }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="hasError('comname', 'required')"
+          >CompanyName is required</mat-error
+        >
+      </mat-form-field>
+    </td>
+  </form>
+
+  <button
+  class ="btn"  (click)="LoadEmployeeAttendance()">
+    Load</button
+  >&nbsp;&nbsp;
+  <button
+   style="margin-right: 2%" class="btn1"
+    (click)="SaveEmployeeAttendance()" [disabled]="disableSaveButton">
+    Save
+  </button>
+</div>
+
+<div *ngIf="showTable">
+  <mat-form-field fxFlex="40%" style="width: 20%">
+    <input
+      matInput
+      type="text"
+      (change)="doFilter($any($event.target).value)"
+      placeholder="Filter"
+    />
+  </mat-form-field>
+
+  <mat-table #table [dataSource]="dataSource" >
+    <ng-container matColumnDef="employeeID">
+      <mat-header-cell *matHeaderCellDef> EmployeeId </mat-header-cell>
+      <mat-select id="empId" [(ngModel)]="emp.employeeID">
+        <mat-cell *matCellDef="let element">
+          {{ element.employeeID }}
+        </mat-cell>
+      </mat-select>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeName">
+      <mat-header-cell *matHeaderCellDef> Employee Name </mat-header-cell>
+      <mat-select id="empname" [(ngModel)]="emp.employeeName">
+        <mat-cell *matCellDef="let element">
+          {{ element.employeeName }}
+        </mat-cell>
+      </mat-select>
+    </ng-container>
+
+    <ng-container matColumnDef="clockDate">
+      <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+      <mat-select id="clockdate" [(ngModel)]="emp.clockDate">
+        <mat-cell *matCellDef="let element">
+          {{ element.clockDate | date }}
+        </mat-cell>
+      </mat-select>
+    </ng-container>
+
+    <ng-container matColumnDef="timeIn">
+      <mat-header-cell *matHeaderCellDef> Time In </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="TimeIn"
+            [(ngModel)]="element.timeIn"
+           type="time"
+          />
+        </mat-form-field>
+        <ngx-mat-timepicker #time></ngx-mat-timepicker>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeOut">
+      <mat-header-cell *matHeaderCellDef> Time Out </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="TimeOut"
+            [(ngModel)]="element.timeOut"
+            type="time"
+          />
+        </mat-form-field>
+        <ngx-mat-timepicker #time></ngx-mat-timepicker>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="remarks">
+      <mat-header-cell *matHeaderCellDef> Remarks </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field floatLabel="never">
+          <input
+            matInput
+            placeholder="Remarks"
+            [(ngModel)]="element.remarks"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+  </mat-table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 7, 9, 11, 13]">
+  </mat-paginator>
+
+</div>

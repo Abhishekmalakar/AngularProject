@@ -1,0 +1,36 @@
+
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 60%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 750px;
+}
+.mat-header-cell {
+  background-color: blue;
+}
+/* .mat-raised-button .mat-primary{
+  padding-top:3% ;
+  margin-left:1%;
+
+} */
+/* mat-raised-button mat-primary1{
+  padding-top:3%;
+} */
+.btn{
+background-color: blue;
+color: white;
+}
+.btn1{
+  background-color: blue;
+  color: white;
+
+  }
