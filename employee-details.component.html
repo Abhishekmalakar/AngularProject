@@ -1,0 +1,63 @@
+<div>
+  <h1>Employee Details</h1>
+<div fxLayout fxLayoutAlign="center center">
+  <mat-form-field fxFlex="40%">
+    <input matInput type="text" (change)="doFilter($any($event.target).value);" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort>
+
+  <ng-container matColumnDef="employeeID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>EmployeeID</th>
+    <td mat-cell *matCellDef="let element"> {{element.employeeID}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="employeeName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="company">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Company</th>
+    <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="designation">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Designation</th>
+    <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="joiningDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>JoiningDate</th>
+    <td mat-cell *matCellDef="let element"> {{element.joiningDate|date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender</th>
+    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef><button (click)="openAddDialog(0)">+Add</button></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="Basic" (click)="openAddDialog(element.employeeKey)">Edit</button>
+
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="Basic" (click)="deleteEmployee(element.employeeKey)">Delete</button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 7, 9, 11,13 ]">
+</mat-paginator>
+</div>
