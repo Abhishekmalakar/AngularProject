@@ -1,0 +1,55 @@
+<div class="calculator">
+  <div class="calc-child">
+      <div class="row">
+          <div style="display: flex;justify-content:space-between">
+              <p><strong>Astoria Calculator</strong></p>
+              <div style="display: flex;" class="mt-1">
+                  <div style="width: 25px;height:25px;background-color: aqua;"></div>
+                  <div style="width: 25px;height:25px;background-color: chocolate;"></div>
+                  <div style="width: 25px;height:25px;background-color: chartreuse;"></div>
+              </div>
+          </div>
+          <div class="col-12 mt-2" id="row1">
+              <input type="text" class="form-control mt-2" #valueArea [disabled]="true">
+          </div>
+          <div class="col-12 mt-3" id="row2">
+              <button class="btn  btn-sm" (click)="appendText('(')"><strong>(</strong></button>
+              <button class="btn  btn-sm" (click)="appendText(')')"><strong>)</strong></button>
+              <button class="btn  btn-sm" (click)="delChar()">Delete<strong>
+                      <i class="fa-solid fa-delete-left fa-1x"></i>
+                  </strong></button>
+              <button class="btn  btn-sm" (click)="clearValueArea()">Clear<strong>
+                      <i class="fa-solid fa-trash"></i> </strong></button>
+              <!--<button class="btn  btn-sm" (click)="appendResult()"
+                  style="background-color: rgba(255, 0, 0, 0.61);"><strong>Ans</strong></button>  -->
+                  <button class="btn  btn-sm" (click)="appendText('/')"><strong>/</strong></button>
+                 </div>
+          <div class="col-12 mt-3" id="row3">
+              <button class="btn  btn-sm" (click)="appendText('7')"><strong>7</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('8')"><strong>8</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('9')"><strong>9</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('*')"><strong>x</strong></button>
+          </div>
+          <div class="col-12 mt-3" id="row3">
+              <button class="btn  btn-sm" (click)="appendText('4')"><strong>4</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('5')"><strong>5</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('6')"><strong>6</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('-')"><strong>-</strong></button>
+          </div>
+          <div class="col-12 mt-3" id="row4">
+              <button class="btn  btn-sm" (click)="appendText('1')"><strong>1</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('2')"><strong>2</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('3')"><strong>3</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('+')"><strong>+</strong></button>
+          </div>
+          <div class="col-12 mt-3 mb-3" id="row5">
+              <button class="btn  btn-sm" (click)="appendText('.')"><strong>.</strong></button>
+              <button class="btn  btn-sm" (click)="appendText('0')"><strong>0</strong></button>
+              <button class="btn btn-sm" (click)="appendResult()"><strong>=</strong></button>
+          </div>
+          <span class="alert alert-danger mt-3" *ngIf="showAlert">
+              <strong>{{showAlertText}}</strong>
+          </span>
+      </div>
+  </div>
+</div>
