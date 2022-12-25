@@ -1,0 +1,122 @@
+
+
+  <mat-card  >
+    <mat-toolbar>
+
+      <h1 style="padding-left: 40%;">{{title}}</h1>
+
+</mat-toolbar>
+<mat-card-content>
+  <form [formGroup]="empFormGroup" >
+<table>
+  <tr>
+<td >Employee ID</td>
+  <td>
+    <mat-form-field class="example-full-width" appearance="fill" >
+        <input matInput type="text id=empId" formControlName="empId" placeholder="*" [(ngModel)]="emp.employeeId" required>
+         <mat-error *ngIf="hasError('empId', 'required')">Employee is required</mat-error>
+         <mat-error *ngIf="hasError('empId', 'pattern')">Special Character not allowed </mat-error>
+       </mat-form-field>
+    <!--</form>-->
+</td>
+
+   <td>Company</td>
+   <td>
+   <mat-form-field appearance="fill">
+    <mat-select id="comname" formControlName="comname" placeholder="*" [(ngModel)]="emp.empCompanyId">
+      <mat-option *ngFor = "let company of companies" [value]="company.companyId">{{company.companyName}}</mat-option>
+
+    </mat-select>
+    <mat-error *ngIf="hasError('comname', 'required')">CompanyName is required</mat-error>
+  </mat-form-field>
+</td>
+ </tr>
+
+ <tr>
+  <td>First Name</td>
+<td >
+    <mat-form-field class="example-full-width" appearance="fill" >
+    <input matInput type="text id=empFirstName" formControlName="empFirstName" placeholder="*" [(ngModel)]="emp.empFirstName" required>
+    <mat-hint>Not more then 100 characters long.</mat-hint>
+     <mat-error *ngIf="hasError('empFirstName', 'required')">Name is required</mat-error>
+    <mat-error *ngIf="hasError('empFirstName', 'maxlength')">You have more than 100 characters</mat-error>
+    <mat-error *ngIf="hasError('empId', 'pattern')">Only Characters are required </mat-error>
+   </mat-form-field>
+</td>
+
+<td>Last Name</td>
+  <td>
+   <mat-form-field class="example-full-width" appearance="fill" >
+    <input matInput type="text id=empLastName" formControlName="empLastName" placeholder="*" [(ngModel)]="emp.empLastName" required>
+    <mat-hint >Not more then 100 characters long.</mat-hint>
+    <mat-error *ngIf="hasError('empLastName', 'required')">LastName is required</mat-error>
+   <mat-error *ngIf="hasError('empLastName', 'maxlength')">You have more than 100 characters</mat-error>
+   <mat-error *ngIf="hasError('empId', 'pattern')">Only Characters are required </mat-error>
+   </mat-form-field>
+ </td>
+   </tr>
+
+   <tr>
+  <td>Gender</td>
+    <td>
+      <mat-form-field appearance="fill">
+       <mat-select  placeholder="*" [(ngModel)]="emp.empGender" id="empgender" formControlName="empgender">
+       <mat-option value="M">Male</mat-option>
+       <mat-option value="F">Female</mat-option>
+       </mat-select>
+          <mat-error *ngIf="hasError('empgender', 'required')">Gender is required</mat-error>
+     </mat-form-field>
+ </td>
+
+   <td>Joining Date</td>
+   <td>
+  <mat-form-field appearance="fill" >
+  <input matInput [matDatepicker]="picker" placeholder="Choose a Date *" type="text id=joindate" formControlName="joinDate" [(ngModel)]="emp.empJoiningDate"
+  required>
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker >
+    <mat-error *ngIf="hasError('joinDate', 'required' )">Joining Date is required</mat-error >
+  </mat-form-field>
+</td>
+  </tr>
+
+
+  <tr>
+    <td>Designation</td>
+    <td>
+     <mat-form-field appearance="fill">
+       <mat-select id="designationname" formControlName="designationname" placeholder="*" [(ngModel)]="emp.empDesignationId">
+         <mat-option *ngFor = "let designation of designationname" [value]="designation.designationId">{{designation.designationName}}</mat-option>
+       </mat-select>
+        <mat-error *ngIf="hasError('designationname', 'required')">DesignationName is required</mat-error>
+     </mat-form-field>
+   </td>
+
+   <td>Resignation Date</td>
+   <td>
+    <mat-form-field appearance="fill">
+  <input matInput [matDatepicker]="picker1" placeholder="Choose a Date" type="text id=resignationdate" formControlName="resignationdate" [(ngModel)]="emp.empResignationDate"[disabled] = "this.disableResignationDate">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+</td>
+  </tr>
+
+  <tr>
+    <td>Salary rate</td>
+  <td>
+     <mat-form-field class="example-full-width" appearance="fill" >
+      <input matInput type="number" placeholder="Enter Hourly Sallary *" id="sallaryRate" formControlName="sallaryRate" [(ngModel)]="emp.empHourlySalaryRate"  max="1000" required>
+      <mat-error *ngIf="hasError('sallaryRate','required')">Sallary is required</mat-error>
+      <mat-error *ngIf="hasError('sallaryRate','pattern')">Only Numbers are required</mat-error>
+      </mat-form-field>
+</td>
+  </tr>
+</table>
+</form>
+</mat-card-content>
+
+  <button class="mat-raised-button"(click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary"(click)="SaveEmployeeDetails()" *ngIf="this.showSavebutton">Save</button>
+  <button class="mat-raised-button mat-primary"(click)="UpdateEmployeeDetails()" *ngIf="this.showUpdatebutton">Update</button>
+
